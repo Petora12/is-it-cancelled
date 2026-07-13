@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { searchShows } from '../api/shows';
+import { searchShows } from '../../api/shows';
 
 export function useShowSearch(query: string) {
   return useQuery({

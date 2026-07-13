@@ -1,4 +1,4 @@
-import type { Show } from '../api/shows';
+import type { Show } from '../../api/shows';
 import { ResultRow } from './ResultRow';
 import './SearchDropdown.css';
 import { Spinner } from './Spinner';

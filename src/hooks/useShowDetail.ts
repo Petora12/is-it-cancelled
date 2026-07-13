@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getShowDetail } from '../api/shows';
+import { getShowDetail } from '../../api/shows';
 
 export function useShowDetail(id: number | null) {
   return useQuery({

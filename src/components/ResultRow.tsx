@@ -1,4 +1,4 @@
-import type { Show } from '../api/shows';
+import type { Show } from '../../api/shows';
 import { PLACEHOLDER } from '../shared/constants';
 import './ResultRow.css';
 
