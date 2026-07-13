@@ -1,0 +1,18 @@
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border-3);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+}
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.stat-value {
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 5px;
+}
