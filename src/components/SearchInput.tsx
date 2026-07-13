@@ -1,12 +1,12 @@
 import './SearchInput.css';
 
-export const SearchInput = ({
+export function SearchInput({
   value,
   onChange,
 }: {
   value: string;
   onChange: (value: string) => void;
-}) => {
+}) {
   return (
     <input
       className="search-input"
@@ -16,4 +16,4 @@ export const SearchInput = ({
       autoFocus
     ></input>
   );
-};
+}

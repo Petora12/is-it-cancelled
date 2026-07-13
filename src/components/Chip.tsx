@@ -1,15 +1,17 @@
+// components/Chip.tsx
+import type { ReactNode } from 'react';
 import './Chip.css';
 
 type ChipProps = {
   variant: 'rating' | 'network';
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
-export const Chip = ({ variant, children }: ChipProps) => {
+export function Chip({ variant, children }: ChipProps) {
   return (
-    <span className={`chip ${variant}`}>
+    <span className={`chip chip-${variant}`}>
       {variant === 'rating' && '★ '}
       {children}
     </span>
   );
-};
+}

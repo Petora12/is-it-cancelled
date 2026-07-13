@@ -2,13 +2,13 @@ import type { Show } from '../api/shows';
 import { PLACEHOLDER } from '../shared/constants';
 import './ResultRow.css';
 
-export const ResultRow = ({
+export function ResultRow({
   show,
   onClick,
 }: {
   show: Show;
   onClick: () => void;
-}) => {
+}) {
   const genres = show.genres.slice(0, 3).join(' · ') || '—';
 
   return (
@@ -30,4 +30,4 @@ export const ResultRow = ({
       </div>
     </button>
   );
-};
+}

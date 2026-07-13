@@ -1,7 +1,7 @@
 import type { Show } from '../api/shows';
 import { ResultRow } from './ResultRow';
 import './SearchDropdown.css';
-import Spinner from './Spinner';
+import { Spinner } from './Spinner';
 
 type SearchDropdownProps = {
   state: 'searching' | 'results' | 'empty';
@@ -9,11 +9,11 @@ type SearchDropdownProps = {
   onSelect: (result: Show) => void;
 };
 
-export const SearchDropdown = ({
+export function SearchDropdown({
   state,
   results,
   onSelect,
-}: SearchDropdownProps) => {
+}: SearchDropdownProps) {
   if (state === 'empty') return null;
 
   if (state === 'searching') {
@@ -33,4 +33,4 @@ export const SearchDropdown = ({
       ))}
     </div>
   );
-};
+}
