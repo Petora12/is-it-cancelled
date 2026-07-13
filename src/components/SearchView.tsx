@@ -1,4 +1,4 @@
-import type { Show } from '../api/shows';
+import type { Show } from '../../api/shows';
 import { SearchDropdown } from './SearchDropdown';
 import { SearchInput } from './SearchInput';
 import './SearchView.css';

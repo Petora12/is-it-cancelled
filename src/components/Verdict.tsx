@@ -1,7 +1,7 @@
 // components/Verdict.tsx — the signature piece. Takes the canonical Status and
 // renders the right glyph/color/copy. in_development folds into the running look.
 import type { CSSProperties } from 'react';
-import type { Status } from '../api/shows';
+import type { Status } from '../../api/shows';
 import './Verdict.css';
 
 type DisplayKind = 'running' | 'ended' | 'cancelled' | 'unknown';

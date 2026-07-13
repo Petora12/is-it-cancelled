@@ -1,6 +1,6 @@
 // components/DetailView.tsx — presentational. Takes a ShowDetail + loading flag,
 // renders the detail page. No fetching, no state.
-import type { ShowDetail } from '../api/shows';
+import type { ShowDetail } from '../../api/shows';
 import { Chip } from './Chip';
 import { StatCard } from './StatCard';
 import { Verdict } from './Verdict';
