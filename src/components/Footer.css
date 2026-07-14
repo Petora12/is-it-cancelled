@@ -1,0 +1,29 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 18px 24px;
+  border-top: 1px solid var(--border-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.footer-link {
+  display: inline-flex;
+  line-height: 0;
+}
+
+.footer-logo {
+  height: 16px;
+  width: auto;
+  display: block;
+}
+
+.footer-text {
+  max-width: 520px;
+}
