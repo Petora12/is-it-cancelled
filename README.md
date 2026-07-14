@@ -1,75 +1,94 @@
-# React + TypeScript + Vite
+# Is It Cancelled?
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A single-page web app to check whether a TV show has been **renewed**, has
+**ended**, was **cancelled**, or is still **undecided**. Search for a show, pick
+it from the results, and get a clear verdict.
 
-Currently, two official plugins are available:
+The app deliberately distinguishes **"cancelled"** (axed before its time) from
+**"ended"** (finished its natural run) — a distinction the underlying data
+source (TMDB) makes and most status checkers don't.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+<!-- Replace with your live URL -->
 
-## React Compiler
+**Live:** https://is-it-cancelled.vercel.app/
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Debounced live search with an autocomplete dropdown
+- Detail page with poster, genres, network, rating, and season/episode stats
+- Four-state verdict (renewed / ended / cancelled / undecided) with a glowing UI
+- Shareable URLs — every show has its own `/show/:id` route
+- TMDB API key kept server-side via a serverless proxy (never exposed to the browser)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Vite** + **React** + **TypeScript**
+- **TanStack Query** (React Query) for data fetching, caching, and loading states
+- **React Router** for navigation
+- Plain CSS with a token-based design system (CSS custom properties)
+- **TMDB API** as the data source, proxied through a **Vercel serverless function**
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Getting started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Prerequisites
 
+- Node.js 18+
+- A free [TMDB](https://www.themoviedb.org/) account and API **Read Access Token**
+  (Settings → API → request a Developer key)
+
+### Install
+
+```bash
+git clone https://github.com/your-username/is-it-cancelled.git
+cd is-it-cancelled
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Environment
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Create a `.env` file in the project root with your TMDB token (no `VITE_`
+prefix — it's used server-side only):
 
 ```
+TMDB_TOKEN=your_tmdb_read_access_token
+```
+
+### Run locally
+
+Because the app uses a serverless function to proxy TMDB, run it with the Vercel
+CLI (which serves the frontend and the `/api` function together):
+
+```bash
+npm i -g vercel
+vercel dev
+```
+
+Then open the URL it prints (usually http://localhost:3000).
+
+## How it works
+
+The browser never talks to TMDB directly. Requests go to a serverless function
+at `/api/tmdb`, which attaches the token server-side and forwards them to TMDB.
+Responses are normalized in `src/api/shows.ts` into a consistent shape, so the
+UI components stay decoupled from the API's structure.
+
+TMDB's status values are mapped to four verdicts:
+
+| TMDB status                                        | Verdict   |
+| -------------------------------------------------- | --------- |
+| Returning Series / In Production / Planned / Pilot | Renewed   |
+| Ended                                              | Ended     |
+| Canceled                                           | Cancelled |
+| _(anything else)_                                  | Undecided |
+
+## Deployment
+
+Deployed on [Vercel](https://vercel.com). Set `TMDB_TOKEN` as an environment
+variable in the project settings (Settings → Environment Variables), then deploy.
+
+## Attribution
+
+This website uses TMDB and the TMDB APIs but is not endorsed, certified, or
+otherwise approved by TMDB.
+
+Data and images provided by [The Movie Database (TMDB)](https://www.themoviedb.org/).
