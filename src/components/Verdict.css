@@ -4,7 +4,6 @@
   align-items: center;
   justify-content: center;
   min-height: 440px;
-  margin-left: -90px; /* glyph overflows leftward into the info column */
 }
 
 .verdict-glyph {

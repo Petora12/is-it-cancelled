@@ -40,5 +40,6 @@
 
 .search-box {
   position: relative;
+  display: flex;
   width: min(580px, 100%);
 }
